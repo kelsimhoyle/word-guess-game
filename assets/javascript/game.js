@@ -10,8 +10,14 @@ var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton"];
 var secretWord = wordList[Math.floor(Math.random() * wordList.length)];
 // splitting the word into seperate letters
 var secretLetters = secretWord.split('');
+var secretBlanks = [];
 
-// console.log(secretLetters);
+for (var i = 0; i < secretWord.length; i++) {
+    secretBlanks[i] = ("_");
+}
+console.log(secretLetters);
+console.log(secretWord);
+console.log(secretBlanks);
 
 // array of user's guesses
 var wrongGuess = [];
@@ -23,31 +29,32 @@ var wrongGuessText = document.getElementById("wrong-guess-text");
 
 var secretLettersText = document.getElementById("secret-word-text");
 
-// create blank spots to be filled and guessed
-for (var i = 0; i < secretLetters.length; i++) {
-    if (letterGuess !== secretLetters) {
-        secretLettersText.textContent += "_ ";
-    } if (letterGuess === secretLetters) {
-        secretLetters.indexOf(letterGuess)
-    }
-}
+secretLettersText.textContent = secretBlanks.join(" ");
+guessesLeftText.textContent = gameControls.guessesLeft;
+
 
 // user starts playing the game
 document.onkeyup = function (event) {
     var letterGuess = event.key.toLowerCase();
+    // can only guess a letter
     if (gameControls.alphabet.includes(letterGuess)) {
         if (gameControls.guessesLeft > 0) {
-            if (secretLetters.includes(letterGuess)) {
-                correctGuess.push(letterGuess)
-                console.log("yay");
-            } else if (wrongGuess.includes(letterGuess)) {
+             // user choses correct letter (index > -1)
+            if (secretLetters.indexOf(letterGuess) > -1) {
+                correctGuess.push(letterGuess);
+                for (var i = 0; i < secretLetters.length; i++) {
+                if(secretLetters[i] === letterGuess) {
+                    secretBlanks[i] = letterGuess;
+                }
+            }
+            } else if (wrongGuess.indexOf(letterGuess) > -1 || correctGuess.indexOf(letterGuess) > -1)  {
                 alert("You already guessed that!");
             }
             else {
                 gameControls.guessesLeft--;
                 wrongGuess.push(letterGuess);
             }
-
+            secretLettersText.textContent = secretBlanks.join(' ');
             guessesLeftText.textContent = gameControls.guessesLeft;
             wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
         }
