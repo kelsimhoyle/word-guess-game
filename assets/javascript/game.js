@@ -15,9 +15,18 @@ var secretBlanks = [];
 for (var i = 0; i < secretWord.length; i++) {
     secretBlanks[i] = ("_");
 }
-console.log(secretLetters);
-console.log(secretWord);
-console.log(secretBlanks);
+
+function hideRules() {
+    var hidden = document.getElementById("rules");
+    hidden.style.display = "none";
+}
+
+function showGame() {
+    var show = document.getElementById("game");
+    show.style.display = "block";
+}
+
+// document.getElementById("game").onload = hideGame();
 
 // array of user's guesses
 var wrongGuess = [];
@@ -26,16 +35,20 @@ var correctGuess = [];
 // variables to edit text on html document
 var guessesLeftText = document.getElementById("guesses-left-text");
 var wrongGuessText = document.getElementById("wrong-guess-text");
-
 var secretLettersText = document.getElementById("secret-word-text");
+
+
+
+function startGame() {
+// user starts playing the game
 
 secretLettersText.textContent = secretBlanks.join(" ");
 guessesLeftText.textContent = gameControls.guessesLeft;
 
 
-// user starts playing the game
 document.onkeyup = function (event) {
     var letterGuess = event.key.toLowerCase();
+
     // can only guess a letter
     if (gameControls.alphabet.includes(letterGuess)) {
         if (gameControls.guessesLeft > 0) {
@@ -62,4 +75,8 @@ document.onkeyup = function (event) {
         alert("Press a letter to make a guess!");
     }
 }
+
+}
+
+
 

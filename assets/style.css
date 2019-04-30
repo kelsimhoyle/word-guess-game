@@ -1,0 +1,44 @@
+
+img {
+    width: 50%;
+    height: auto;
+}
+
+#game {
+    display: none;
+}
+
+#rules {
+    height: 20vh;
+    padding: 30vh 0;
+}
+
+body {
+    width: 80%;
+    margin: 25px auto;
+    text-align: center;
+    font-family: American Typewriter, serif;
+    line-height: 2;
+}
+h1 {
+    font-size: 44px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 40px;
+}
+h3 {
+    font-size: 24px;
+}
+
+p {
+    font-size: 18px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 20px;
+    font-family: American Typewriter, serif;
+    margin: 20px;
+}
