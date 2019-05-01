@@ -26,55 +26,58 @@ function showGame() {
     show.style.display = "block";
 }
 
-// document.getElementById("game").onload = hideGame();
-
 // array of user's guesses
 var wrongGuess = [];
 var correctGuess = [];
+var lettersLeft = secretLetters.length;
+
 
 // variables to edit text on html document
 var guessesLeftText = document.getElementById("guesses-left-text");
 var wrongGuessText = document.getElementById("wrong-guess-text");
 var secretLettersText = document.getElementById("secret-word-text");
+var winningText = document.getElementById("winning-text");
 
 
 
 function startGame() {
-// user starts playing the game
+    // user starts playing the game
 
-secretLettersText.textContent = secretBlanks.join(" ");
-guessesLeftText.textContent = gameControls.guessesLeft;
+    secretLettersText.textContent = secretBlanks.join(" ");
+    guessesLeftText.textContent = gameControls.guessesLeft;
 
+    document.onkeyup = function (event) {
+        var letterGuess = event.key.toLowerCase();
 
-document.onkeyup = function (event) {
-    var letterGuess = event.key.toLowerCase();
-
-    // can only guess a letter
-    if (gameControls.alphabet.includes(letterGuess)) {
-        if (gameControls.guessesLeft > 0) {
-             // user choses correct letter (index > -1)
-            if (secretLetters.indexOf(letterGuess) > -1) {
-                correctGuess.push(letterGuess);
-                for (var i = 0; i < secretLetters.length; i++) {
-                if(secretLetters[i] === letterGuess) {
-                    secretBlanks[i] = letterGuess;
+        // can only guess a letter
+        if (gameControls.alphabet.includes(letterGuess)) {
+            if (gameControls.guessesLeft > 0 && (lettersLeft > 0)) {
+                // user choses correct letter (index > -1)
+                if (secretLetters.indexOf(letterGuess) > -1) {
+                    correctGuess.push(letterGuess);
+                    for (var i = 0; i < secretLetters.length; i++) {
+                        if (secretLetters[i] === letterGuess) {
+                            secretBlanks[i] = letterGuess;
+                            lettersLeft--;
+                        }
+                    }
+                } else if ((wrongGuess.indexOf(letterGuess) > -1) || (correctGuess.indexOf(letterGuess) > -1)) {
+                    alert("You already guessed that!");
+                } else {
+                    gameControls.guessesLeft--;
+                    wrongGuess.push(letterGuess);
                 }
+                secretLettersText.textContent = secretBlanks.join(' ');
+                guessesLeftText.textContent = gameControls.guessesLeft;
+                wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
             }
-            } else if (wrongGuess.indexOf(letterGuess) > -1 || correctGuess.indexOf(letterGuess) > -1)  {
-                alert("You already guessed that!");
-            }
-            else {
-                gameControls.guessesLeft--;
-                wrongGuess.push(letterGuess);
-            }
-            secretLettersText.textContent = secretBlanks.join(' ');
-            guessesLeftText.textContent = gameControls.guessesLeft;
-            wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
-        }
-    } else {
-        alert("Press a letter to make a guess!");
+        } 
+        else {
+            alert("Press a letter to make a guess!");
+        } if (lettersLeft === 0 ) {
+            winningText.textContent = "You Win!!!";
+        } 
     }
-}
 
 }
 
