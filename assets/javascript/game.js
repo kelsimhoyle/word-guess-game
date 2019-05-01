@@ -3,11 +3,8 @@ var gameControls = {
     alphabet: 'abcdefghijklmnopqrstuvwxyz'.split(''),
     gamesWon: 0,
 }
+var gamesLost = 0;
 var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton"];
-// variable for the random word to be guessed
-//    // user starts playing the game
-
-
 
 // // splitting the word into seperate letters
 function generateWord() {
@@ -16,8 +13,25 @@ function generateWord() {
 }
 
 function hideRules() {
-    var hidden = document.getElementById("rules");
-    hidden.style.display = "none";
+    document.getElementById("rules").style.display = "none";
+}
+
+var winningDiv = document.getElementById("winning-div");
+function displayWinningDiv () {
+    winningDiv.style.display = "block";
+}
+
+function hideWinningDiv () {
+    winningDiv.style.display = "none";
+}
+
+var losingDiv = document.getElementById("losing-div");
+function displayLosingDiv () {
+    losingDiv.style.display = "block";
+}
+
+function hideLosingDiv () {
+    losingDiv.style.display = "none";
 }
 
 function showGame() {
@@ -29,7 +43,6 @@ function showGame() {
 var guessesLeftText = document.getElementById("guesses-left-text");
 var wrongGuessText = document.getElementById("wrong-guess-text");
 var secretLettersText = document.getElementById("secret-word-text");
-var winningText = document.getElementById("winning-text");
 var gamesWonText = document.getElementById("games-won-text");
 
 
@@ -54,7 +67,6 @@ function startGame() {
 
     secretLettersText.textContent = secretBlanks.join(" ");
     guessesLeftText.textContent = gameControls.guessesLeft;
-    lettersLeft = secretLetters.length;
     gamesWonText.textContent = gameControls.gamesWon;
     guessesLeftText.textContent = guessesLeft;
     wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
@@ -88,8 +100,11 @@ function startGame() {
         else {
             alert("Press a letter to make a guess!");
         } if (lettersLeft === 0) {
-            winningText.textContent = "You Win!!!";
             gameControls.gamesWon++;
+            displayWinningDiv();
+        } else if (guessesLeft === 0) {
+            gamesLost++;
+            displayLosingDiv();
         }
     }
 
