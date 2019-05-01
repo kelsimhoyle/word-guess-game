@@ -30,6 +30,7 @@ var guessesLeftText = document.getElementById("guesses-left-text");
 var wrongGuessText = document.getElementById("wrong-guess-text");
 var secretLettersText = document.getElementById("secret-word-text");
 var winningText = document.getElementById("winning-text");
+var gamesWonText = document.getElementById("games-won-text");
 
 
 
@@ -54,6 +55,7 @@ function startGame() {
     secretLettersText.textContent = secretBlanks.join(" ");
     guessesLeftText.textContent = gameControls.guessesLeft;
     lettersLeft = secretLetters.length;
+    gamesWonText.textContent = gameControls.gamesWon;
     guessesLeftText.textContent = guessesLeft;
     wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
 
@@ -87,6 +89,7 @@ function startGame() {
             alert("Press a letter to make a guess!");
         } if (lettersLeft === 0) {
             winningText.textContent = "You Win!!!";
+            gameControls.gamesWon++;
         }
     }
 
