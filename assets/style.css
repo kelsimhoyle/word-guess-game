@@ -10,6 +10,20 @@ img {
     display: none;
 }
 
+#winning-div,
+#losing-div {
+    width: 600px;
+    height: auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgray;
+    border: 2px solid black;
+    box-shadow: 0 0px 20px 10px rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+
 #rules {
     height: 20vh;
     width: 60%;
@@ -28,6 +42,12 @@ body {
 
 h1 {
     font-size: 44px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 40px;
+    color: black;
     letter-spacing: 2px;
 }
 
