@@ -3,12 +3,13 @@
 var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 var gamesWon = 0;
 var gamesLost = 0;
-var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton", "paper", "stanley", "angela", "oscar", "kevin", "stanley"];
+var wordList = ["beets", "Dwight", "Jim", "Pam", "Scranton", "paper", "Stanley", "Angela", "Oscar", "Kevin", "Stanley", "Creed"];
 
 // // splitting the word into seperate letters
 function generateWord() {
-    var randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-    return randomWord.split('');
+    var randomWord= "";
+    randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+    return randomWord;
 }
 
 function hideRules() {
@@ -44,6 +45,7 @@ var wrongGuessText = document.getElementById("wrong-guess-text");
 var secretLettersText = document.getElementById("secret-word-text");
 var gamesWonText = document.getElementById("games-won-text");
 var gamesLostText = document.getElementById("games-lost-text");
+var correctWordText = document.getElementById("correct-word");
 
 
 
@@ -53,7 +55,8 @@ function startGame() {
     var wrongGuess = [];
     var correctGuess = [];
     var guessesLeft = 10;
-    var secretLetters = generateWord();
+    var correctWord =  generateWord();
+    var secretLetters =  correctWord.toLowerCase().split('');
     var secretBlanks = [];
     var lettersLeft = 0;
     for (var i = 0; i < secretLetters.length; i++) {
@@ -71,6 +74,7 @@ function startGame() {
     gamesLostText.textContent = gamesLost;
     guessesLeftText.textContent = guessesLeft;
     wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
+    correctWordText.textContent = correctWord;
 
     document.onkeyup = function (event) {
         var letterGuess = event.key.toLowerCase();
