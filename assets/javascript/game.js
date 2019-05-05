@@ -3,7 +3,7 @@
 var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 var gamesWon = 0;
 var gamesLost = 0;
-var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton"];
+var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton", "paper", "stanley", "angela", "oscar", "kevin", "stanley"];
 
 // // splitting the word into seperate letters
 function generateWord() {
