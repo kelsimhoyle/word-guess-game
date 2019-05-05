@@ -1,8 +1,7 @@
 // variables for the game
-var gameControls = {
-    alphabet: 'abcdefghijklmnopqrstuvwxyz'.split(''),
-    gamesWon: 0,
-}
+
+var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+var gamesWon = 0;
 var gamesLost = 0;
 var wordList = ["beets", "dwight", "jim", "pam", "sprinkles", "scranton"];
 
@@ -44,6 +43,7 @@ var guessesLeftText = document.getElementById("guesses-left-text");
 var wrongGuessText = document.getElementById("wrong-guess-text");
 var secretLettersText = document.getElementById("secret-word-text");
 var gamesWonText = document.getElementById("games-won-text");
+var gamesLostText = document.getElementById("games-lost-text");
 
 
 
@@ -66,8 +66,9 @@ function startGame() {
     console.log(secretLetters + lettersLeft);
 
     secretLettersText.textContent = secretBlanks.join(" ");
-    guessesLeftText.textContent = gameControls.guessesLeft;
-    gamesWonText.textContent = gameControls.gamesWon;
+    guessesLeftText.textContent = guessesLeft;
+    gamesWonText.textContent = gamesWon;
+    gamesLostText.textContent = gamesLost;
     guessesLeftText.textContent = guessesLeft;
     wrongGuessText.textContent = wrongGuess.join(' ').toUpperCase();
 
@@ -75,7 +76,7 @@ function startGame() {
         var letterGuess = event.key.toLowerCase();
 
         // can only guess a letter
-        if (gameControls.alphabet.includes(letterGuess)) {
+        if (alphabet.includes(letterGuess)) {
             if (guessesLeft > 0 && (lettersLeft > 0)) {
                 // user choses correct letter (index > -1)
                 if ((secretLetters.indexOf(letterGuess) > -1) && (correctGuess.indexOf(letterGuess) === -1)) {
@@ -100,7 +101,7 @@ function startGame() {
         else {
             alert("Press a letter to make a guess!");
         } if (lettersLeft === 0) {
-            gameControls.gamesWon++;
+            gamesWon++;
             displayWinningDiv();
         } else if (guessesLeft === 0) {
             gamesLost++;
